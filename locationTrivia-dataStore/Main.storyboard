@@ -1,10 +1,57 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="SAR-7n-Hfp">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="SAR-7n-Hfp">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
     <scenes>
+        <!--Add Location View Controller-->
+        <scene sceneID="isQ-tU-y04">
+            <objects>
+                <viewController id="9AF-Q6-hB0" customClass="FISAddLocationViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xyI-2y-jJY"/>
+                        <viewControllerLayoutGuide type="bottom" id="tMz-fT-P72"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5yN-HI-Rio">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xIv-5U-Uqq">
+                                <rect key="frame" x="16" y="122" width="288" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Latitude" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wrx-gi-GH5">
+                                <rect key="frame" x="16" y="194" width="288" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Longitude" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rix-kB-c37">
+                                <rect key="frame" x="16" y="269" width="288" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Qoe-Sf-G9d">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="1VS-5g-7T5">
+                            <connections>
+                                <action selector="saveButtonTapped:" destination="9AF-Q6-hB0" id="761-HE-bgO"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="latitudeTextField" destination="wrx-gi-GH5" id="srp-fO-fkN"/>
+                        <outlet property="longitudeTextField" destination="Rix-kB-c37" id="Owb-32-Wj5"/>
+                        <outlet property="nameTextField" destination="xIv-5U-Uqq" id="oxf-q9-5vP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lir-9S-PEW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="557" y="-566"/>
+        </scene>
         <!--Locations Table View Controller-->
         <scene sceneID="ZgT-nQ-mh5">
             <objects>
@@ -25,7 +72,7 @@
                                             <rect key="frame" x="15" y="11" width="33" height="21"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1eH-WV-M3D">
@@ -38,7 +85,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="tUP-So-DAg" kind="push" id="cYc-qr-cPS"/>
+                                    <segue destination="tUP-So-DAg" kind="push" identifier="toTableView" id="cYc-qr-cPS"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -48,7 +95,12 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="18V-W7-rat">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="PuT-mE-U89"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="PuT-mE-U89">
+                            <connections>
+                                <action selector="locationBarButtonTapped:" destination="Cmu-ZO-bCa" id="SY7-PQ-xhi"/>
+                                <segue destination="9AF-Q6-hB0" kind="push" identifier="toAddLocations" id="3rW-fz-Faz"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A96-Xg-9cB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -75,7 +127,7 @@
                                             <rect key="frame" x="15" y="0.0" width="290" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>

@@ -8,7 +8,7 @@
 #import "FISLocation.h"
 #import "FISLocationsTableViewController.h"
 #import "FISTriviaTableViewController.h"
-
+#import "FISAddLocationViewController.h"
 @interface FISLocationsTableViewController ()
 
 @end
@@ -23,6 +23,22 @@
     }
     return self;
 }
+- (IBAction)locationBarButtonTapped:(id)sender {
+    
+    NSLog(@"YOU TAPPED ME");
+    
+    
+    
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self.tableView reloadData];
+}
+
 
 - (void)viewDidLoad
 {
@@ -148,11 +164,21 @@
     // Pass the selected object to the new view controller.
 
     NSIndexPath *ip = [self.tableView indexPathForSelectedRow];
-    FISLocation *location = self.locationsDataManager.locations[ip.row];
-
-    FISTriviaTableViewController *triviaVC = segue.destinationViewController;
-
-    triviaVC.trivia = location.trivia;
+    
+    if ([segue.identifier isEqual: @"toTableView"]) {
+        FISLocation *location = self.locationsDataManager.locations[ip.row];
+        
+        FISTriviaTableViewController *triviaVC = segue.destinationViewController;
+        
+        triviaVC.trivia = location.trivia;
+    }
+    
+    if ([segue.identifier isEqual:@"toAddLocations"]) {
+        FISAddLocationViewController *destination = segue.destinationViewController;
+        
+    }
+    
+    
 
 }
 
